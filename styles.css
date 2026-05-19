@@ -45,6 +45,12 @@ body {
   font-weight: inherit;
 }
 
+.progress-note {
+  margin: 8px auto 10px;
+  max-width: 920px;
+  color: #7f1d1d;
+}
+
 .badge {
   margin: 0 0 10px;
   font-weight: 700;
