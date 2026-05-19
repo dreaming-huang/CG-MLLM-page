@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CG-MLLM Project Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <!-- <p class="badge">ICML 2026</p> -->
+      <h1>
+        <span class="title-acronym">CG-MLLM</span>:
+        <span class="title-initial">C</span>aptioning and
+        <span class="title-initial">G</span>enerating 3D Content via
+        <span class="title-initial">M</span>ulti-modal
+        <span class="title-initial">L</span>arge
+        <span class="title-initial">L</span>anguage
+        <span class="title-initial">M</span>odels
+      </h1>
+      <p class="authors">
+        Junming Huang<sup>1,2</sup>&nbsp;&nbsp;
+        Chi Wang<sup>1</sup>&nbsp;&nbsp;
+        Letian Li<sup>1,2</sup>&nbsp;&nbsp;
+        Guangkai Xu<sup>1</sup>&nbsp;&nbsp;
+        Donglin Huang<sup>1</sup>&nbsp;&nbsp;
+        Hao Chen<sup>1</sup>&nbsp;&nbsp;
+        Qiang Dai<sup>2</sup>&nbsp;&nbsp;
+        Weiwei Xu<sup>1</sup>
+      </p>
+      <div class="affiliation-grid">
+        <div class="affiliation-item">
+          <img class="logo-zju" src="assets/zju_logo.png" alt="Zhejiang University logo">
+          <p class="affiliation-name"><sup>1</sup> Zhejiang University</p>
+        </div>
+        <div class="affiliation-item">
+          <img class="logo-lightspeed" src="assets/lightspeed_logo.png" alt="LIGHTSPEED logo">
+          <p class="affiliation-name"><sup>2</sup> LIGHTSPEED</p>
+        </div>
+      </div>
+      <p class="venue">ICML, 2026</p>
+      <p class="links">
+        <a href="https://arxiv.org/abs/2601.21798" target="_blank" rel="noreferrer">ArXiv</a>
+        <a href="https://icml.cc/virtual/2026/poster/63909" target="_blank" rel="noreferrer">ICML</a>
+        <a href="https://github.com/dreaming-huang/CG-MLLM/tree/main" target="_blank" rel="noreferrer">Code</a>
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Abstract</h2>
+      <p class="abstract-text">
+        Large Language Models (LLMs) have revolutionized text generation and multimodal perception, but their capabilities in 3D content generation remain underexplored. Existing methods compromise by producing either low-resolution meshes or coarse structural proxies, failing to capture fine-grained geometry natively. In this paper, we propose CG-MLLM, a novel Multi-modal Large Language Model (MLLM) capable of 3D captioning and high-resolution 3D generation in a single framework. Leveraging the Mixture-of-Transformer architecture, CG-MLLM decouples disparate modeling needs, where the Token-level Autoregressive (TokenAR) Transformer handles token-level content, and the Block-level Autoregressive (BlockAR) Transformer handles block-level content. By integrating a pre-trained vision-language backbone with a specialized 3D VAE latent space, CG-MLLM facilitates long-context interactions between standard tokens and spatial blocks within a single integrated architecture. Experimental results show that CG-MLLM significantly outperforms existing MLLMs in generating high-fidelity 3D objects, effectively bringing high-resolution 3D content creation into the mainstream LLM paradigm. Beyond generation, we further observe that learning to produce 3D content transfers back to perception, strengthening the model's image-based 3D understanding.
+      </p>
+    </section>
+
+    <section class="card">
+      <!-- <h2>Teaser Video</h2> -->
+      <video controls autoplay muted loop playsinline preload="metadata">
+        <source src="assets/videos/teaser_video.mp4" type="video/mp4">
+        Your browser does not support MP4 playback. Please download the video file directly.
+      </video>
+    </section>
+
+    <section class="card">
+      <h2>Method Overview</h2>
+      <div class="pipeline-grid">
+        <div class="pipeline-item">
+          <img src="assets/figure1.png" alt="Figure 1: Pipeline of CG-MLLM">
+          <p class="caption">Figure 1. The Pipeline of CG-MLLM. Our multimodal architecture processes vision, text, and 3D spatial inputs to generate text and 3D spatial outputs. It features a TokenAR Transformer for sequential next-token prediction and a BlockAR Transformer for efficient parallel block prediction, both governed by strict causal masking.</p>
+        </div>
+        <div class="pipeline-item">
+          <img src="assets/figure2.png" alt="Figure 2: Unified spatial perception and generation">
+          <p class="caption">Figure 2. Our approach unifies spatial perception and generation in a single model, supporting image understanding, point cloud understanding, mesh generation, and textual intent understanding across multiple spatial modalities.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Performance</h2>
+
+      <div class="performance-item">
+        <!-- <h3>Figure 4</h3> -->
+        <img src="assets/figure4.png" alt="Figure 4: Comparison with other methods on image-to-3D task">
+        <p class="caption">Comparison with other methods on the image-to-3D task. For clearer visualization of geometry, materials are removed in the second row. Compared with MLLM-based methods, our method generates more complete geometry, while achieving comparable visual quality to non-MLLM methods.</p>
+      </div>
+
+      <div class="performance-tables">
+        <div class="performance-item">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>p-FID ↓</th>
+                  <th>p-KID ↓</th>
+                  <th>CLIP-IQA+ ↑</th>
+                  <th>MUSIQ ↑</th>
+                  <th>CLIP ↑</th>
+                  <th>User Study ↑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-row"><td colspan="7">Non-MLLM-Based</td></tr>
+                <tr>
+                  <td>Michelangelo</td><td>17.96</td><td>0.56</td><td class="second">0.45</td><td class="best">71.42</td><td>84.08</td><td>2.60</td>
+                </tr>
+                <tr>
+                  <td>CraftsMan</td><td class="second">14.09</td><td class="second">0.40</td><td class="second">0.45</td><td>71.09</td><td class="second">84.86</td><td>3.15</td>
+                </tr>
+                <tr>
+                  <td>Hunyuan3D-2.1</td><td>16.80</td><td>0.53</td><td class="best">0.47</td><td class="second">71.20</td><td class="best">85.11</td><td>3.15</td>
+                </tr>
+                <tr>
+                  <td>TRELLIS</td><td class="best">7.36</td><td class="best">0.12</td><td>0.44</td><td>66.97</td><td>84.13</td><td class="second">3.28</td>
+                </tr>
+                <tr>
+                  <td>SAM3D</td><td>33.92</td><td>1.13</td><td class="best">0.47</td><td>70.21</td><td>84.67</td><td class="best">3.45</td>
+                </tr>
+                <tr class="group-row"><td colspan="7">MLLM-Based</td></tr>
+                <tr>
+                  <td>SAR3D</td><td>30.07</td><td>1.00</td><td class="second">0.42</td><td class="second">66.01</td><td>82.86</td><td class="second">2.93</td>
+                </tr>
+                <tr>
+                  <td>ShapeLLM-Omni</td><td class="second">13.11</td><td class="second">0.29</td><td>0.37</td><td>55.71</td><td class="second">84.18</td><td>2.30</td>
+                </tr>
+                <tr>
+                  <td>Ours</td><td class="best">12.55</td><td class="best">0.27</td><td class="best">0.45</td><td class="best">71.65</td><td class="best">84.47</td><td class="best">3.32</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">Performance comparison with Non-MLLM-based and MLLM-based 3D generative models. The best results in each column are highlighted in red, while the second-best results are highlighted in yellow.</p>
+        </div>
+
+        <div class="performance-item">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>BLEU-1 ↑</th>
+                  <th>ROUGE-L ↑</th>
+                  <th>METEOR ↑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-row"><td colspan="4">3D latent Inputs</td></tr>
+                <tr><td>3D-LLM</td><td>16.91</td><td>19.48</td><td class="second">19.73</td></tr>
+                <tr><td>PointLLM-13B</td><td class="second">17.09</td><td class="second">20.99</td><td>16.45</td></tr>
+                <tr><td>ShapeLLM-Omni-7B</td><td class="best">18.51</td><td class="best">21.37</td><td class="best">19.89</td></tr>
+                <tr class="group-row"><td colspan="4">Image Inputs</td></tr>
+                <tr><td>InstructBLIP-13B</td><td class="second">4.65</td><td class="second">8.85</td><td class="second">13.23</td></tr>
+                <tr><td>LLaVA-13B</td><td>4.02</td><td>8.15</td><td>12.58</td></tr>
+                <tr><td>Qwen3-VL-2B</td><td>3.13</td><td>7.21</td><td>11.92</td></tr>
+                <tr><td>Ours-2B MOT</td><td class="best">13.51</td><td class="best">19.13</td><td class="best">14.28</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">Quantitative comparison on 3D object captioning metrics. The best results in each column are highlighted in red, while the second-best results are highlighted in yellow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>BibTeX</h2>
+      <pre class="bibtex"><code>@misc{huang2026cgmllmcaptioninggenerating3d,
+      title={CG-MLLM: Captioning and Generating 3D content via Multi-modal Large Language Models},
+      author={Junming Huang and Chi Wang and Letian Li and Guangkai Xu and Donglin Huang and Hao Chen and Qiang Dai and Weiwei Xu},
+      year={2026},
+      eprint={2601.21798},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2601.21798},
+}</code></pre>
+    </section>
+  </main>
+</body>
+</html>
