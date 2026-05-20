@@ -266,31 +266,6 @@ th {
   white-space: pre;
 }
 
-.pageviews {
-  margin: 12px 0 0;
-  text-align: center;
-  color: #64748b;
-  font-size: 0.9rem;
-}
-
-.pageviews-inner {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.pageviews .separator {
-  margin: 0;
-  color: #94a3b8;
-}
-
-#busuanzi_container_page_pv,
-#busuanzi_container_site_uv {
-  white-space: nowrap;
-}
-
 @media (max-width: 900px) {
   .affiliation-grid {
     gap: 28px;
