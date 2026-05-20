@@ -273,8 +273,16 @@ th {
   font-size: 0.9rem;
 }
 
+.pageviews-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .pageviews .separator {
-  margin: 0 8px;
+  margin: 0;
   color: #94a3b8;
 }
 
