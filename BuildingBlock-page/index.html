@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BuildingBlock Project Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>
+        <span class="title-acronym">BuildingBlock</span>:
+        A Hybrid Approach for Structured Building Generation
+      </h1>
+      <p class="authors">
+        Junming Huang<sup>1,*</sup>&nbsp;&nbsp;
+        Chi Wang<sup>1,*</sup>&nbsp;&nbsp;
+        Letian Li<sup>1</sup>&nbsp;&nbsp;
+        Changxin Huang<sup>1</sup>&nbsp;&nbsp;
+        Qiang Dai<sup>2,†</sup>&nbsp;&nbsp;
+        Weiwei Xu<sup>1,†</sup>
+      </p>
+      <p class="author-note"><sup>*</sup> Equal contribution.&nbsp;&nbsp;<sup>†</sup> Corresponding authors.</p>
+      <div class="affiliation-grid">
+        <div class="affiliation-item">
+          <img class="logo-zju" src="assets/zju_logo.png" alt="Zhejiang University logo">
+          <p class="affiliation-name"><sup>1</sup> Zhejiang University</p>
+        </div>
+        <div class="affiliation-item">
+          <img class="logo-lightspeed" src="assets/lightspeed_logo.png" alt="LIGHTSPEED logo">
+          <p class="affiliation-name"><sup>2</sup> LIGHTSPEED</p>
+        </div>
+      </div>
+      <p class="venue">SIGGRAPH Conference Papers, 2025</p>
+      <p class="links">
+        <a href="https://arxiv.org/abs/2505.04051" target="_blank" rel="noreferrer">ArXiv</a>
+        <a href="https://doi.org/10.1145/3721238.3730705" target="_blank" rel="noreferrer">Paper</a>
+        <a href="https://github.com/Tencent/BuildingBlock" target="_blank" rel="noreferrer">Code</a>
+        <a href="https://huggingface.co/datasets/dreaming-huang/buildingblock" target="_blank" rel="noreferrer">Dataset</a>
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Abstract</h2>
+      <p class="abstract-text">
+        Three-dimensional building generation is vital for applications in gaming, virtual reality, and digital twins, yet current methods face challenges in producing diverse, structured, and hierarchically coherent buildings. We propose BuildingBlock, a hybrid approach that integrates generative models, procedural content generation (PCG), and large language models (LLMs) to address these limitations. Specifically, our method introduces a two-phase pipeline: the Layout Generation Phase (LGP) and the Building Construction Phase (BCP). LGP reframes box-based layout generation as a point-cloud generation task, utilizing a newly constructed architectural dataset and a Transformer-based diffusion model to create globally consistent layouts. With LLMs, these layouts are extended into rule-based hierarchical designs, seamlessly incorporating component styles and spatial structures. The BCP leverages these layouts to guide PCG, enabling local-customizable, high-quality structured building generation. Experimental results demonstrate BuildingBlock’s effectiveness in generating diverse and hierarchically structured buildings, achieving state-of-the-art results on multiple benchmarks, and paving the way for scalable and intuitive architectural workflows.
+      </p>
+    </section>
+
+    <section class="card">
+      <img src="assets/figure1.png" alt="Figure 1: Text-to-building generation and incremental local editing">
+      <p class="caption">Figure 1. Our method can faithfully generate structured buildings from text prompts. From top to bottom: user instruction, box-based layout, structured building. A) The same text prompt can generate diverse layouts, which can further generate diverse buildings. B) An example of incremental local editing for an instance of part A.</p>
+    </section>
+
+    <section class="card">
+      <h2>Method Overview</h2>
+      <div class="pipeline-grid">
+        <div class="pipeline-item">
+          <img src="assets/figure2.jpg" alt="Figure 2: Pipeline of BuildingBlock">
+          <p class="caption">Figure 2. The pipeline of BuildingBlock. Given a text description for the building, a stylized layout profile is first generated, which is obtained by fusing two phases. A) The Layout Generation Phase has a dual-branch structure, one diffusion-based branch produces bounding box generation for the layout, and the other LLM-based branch provides the style information extractor for the components. B) Then, the Building Construction Phase employs a PCG method to generate the corresponding structured building based on the stylized layout profile.</p>
+        </div>
+        <div class="pipeline-item">
+          <img src="assets/figure3.png" alt="Figure 3: Box-based layout generation">
+          <p class="caption">Figure 3. The process of box-based layout generation. A) The box-based layout representation, including categories, sizes, and locations. B) The noise addition process of the layout diffusion model. C) The denoising process of the layout diffusion model, where the traditional positional encoding is removed and replaced by spatial encoding from the spatial positions of boxes. D) The Transformer network structure used in the diffusion model.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Performance</h2>
+
+      <div class="performance-tables">
+        <div class="performance-item">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th class="num">FID ↓</th>
+                  <th class="num">KID ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-row"><td colspan="3">Building layout generation</td></tr>
+                <tr>
+                  <td>LayoutGPT*</td><td class="num">94.60</td><td class="num">10.05</td>
+                </tr>
+                <tr>
+                  <td>ATISS</td><td class="num">30.93</td><td class="num">3.34</td>
+                </tr>
+                <tr>
+                  <td>DiffuScene</td><td class="num second">20.95</td><td class="num second">1.95</td>
+                </tr>
+                <tr>
+                  <td>Ours</td><td class="num best">6.00</td><td class="num best">0.30</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">Table 1(a). Quantitative results of building layout generation. * denotes a zero-shot method. Best results are highlighted in red, second-best in yellow.</p>
+        </div>
+
+        <div class="performance-item">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th class="num">FID ↓</th>
+                  <th class="num">KID ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-row"><td colspan="3">Indoor layout generation</td></tr>
+                <tr>
+                  <td>LayoutGPT*</td><td class="num">45.13</td><td class="num">9.89</td>
+                </tr>
+                <tr>
+                  <td>ATISS</td><td class="num">18.60</td><td class="num">1.72</td>
+                </tr>
+                <tr>
+                  <td>DiffuScene</td><td class="num second">17.21</td><td class="num second">0.70</td>
+                </tr>
+                <tr>
+                  <td>Ours</td><td class="num best">16.76</td><td class="num best">0.29</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">Table 1(b). Quantitative results of indoor layout generation on 3D-FRONT bedrooms. * denotes a zero-shot method. Best results are highlighted in red, second-best in yellow.</p>
+        </div>
+      </div>
+
+      <div class="performance-item">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>PadReal</th>
+                <th>Spatial Encoding</th>
+                <th class="num">FID ↓</th>
+                <th class="num">KID ↓</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>×</td><td>×</td><td class="num">13.33</td><td class="num">1.10</td>
+              </tr>
+              <tr>
+                <td>×</td><td>✓</td><td class="num second">12.22</td><td class="num second">0.95</td>
+              </tr>
+              <tr>
+                <td>✓</td><td>×</td><td class="num">12.38</td><td class="num">1.05</td>
+              </tr>
+              <tr>
+                <td>✓</td><td>✓</td><td class="num best">6.00</td><td class="num best">0.30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">Table 2. Ablation study. Using PadReal or Spatial Encoding individually only brings slight improvements, but combining them allows the model to improve realism and diversity. Best results are highlighted in red, second-best in yellow.</p>
+      </div>
+
+      <div class="performance-item">
+        <img src="assets/figure5.png" alt="Figure 5: Qualitative comparison on unconditional layout generation">
+        <p class="caption">Figure 5. Qualitative comparison on unconditional layout generation. Layouts generated by LayoutGPT, ATISS, and DiffuScene exhibit misaligned layouts and floating components, such as windows that are not attached to walls. Our method produces high-quality layouts with coordinated components. Artifacts are marked with red boxes.</p>
+      </div>
+
+      <div class="performance-item">
+        <img src="assets/figure6.png" alt="Figure 6: Qualitative comparison of generated buildings">
+        <p class="caption">Figure 6. Qualitative comparison of buildings generated with state-of-the-art methods. Artifacts are marked with red boxes.</p>
+      </div>
+
+      <div class="performance-item">
+        <img src="assets/figure7.png" alt="Figure 7: Diverse buildings generated across styles">
+        <p class="caption">Figure 7. Diverse buildings generated with our method across varied styles, demonstrating flexibility and adaptability to building style such as regions, materials, and functions. The text beneath the building indicates the style used to retrieve components during the generation process.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Localized Editing</h2>
+      <img src="assets/figure10.png" alt="Figure 10: Progressive localized user editing">
+      <p class="caption">Figure 10. An example of progressive localized user editing. An initial generated building (Original) is iteratively refined through progressive editing, including the addition, removal, and replacement of architectural components, as well as the modification of specific attributes such as size, material properties, and styles.</p>
+    </section>
+
+    <section class="card">
+      <h2>BibTeX</h2>
+      <pre class="bibtex"><code>@inproceedings{huang2025buildingblock,
+  author    = {Junming Huang and Chi Wang and Letian Li and Changxin Huang and Qiang Dai and Weiwei Xu},
+  title     = {BuildingBlock: A Hybrid Approach for Structured Building Generation},
+  booktitle = {Special Interest Group on Computer Graphics and Interactive Techniques Conference Conference Papers (SIGGRAPH Conference Papers '25)},
+  year      = {2025},
+  address   = {Vancouver, BC, Canada},
+  publisher = {Association for Computing Machinery},
+  doi       = {10.1145/3721238.3730705},
+  isbn      = {979-8-4007-1540-2},
+  url       = {https://doi.org/10.1145/3721238.3730705}
+}</code></pre>
+    </section>
+  </main>
+</body>
+</html>
