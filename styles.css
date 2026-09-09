@@ -162,7 +162,7 @@ body {
 .fact-card {
   margin: 0;
   padding: 16px 18px 18px;
-  background: #f8fafc;
+  background: #f2f6ff;
   border: 1px solid var(--divider);
   border-left: 3px solid #2563eb;
   border-radius: 10px;
