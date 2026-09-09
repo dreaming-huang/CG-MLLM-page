@@ -30,7 +30,7 @@ body {
   background: #f2f6ff;
   color: var(--text);
   text-align: center;
-  padding: 40px 0 28px;
+  padding: 40px 0 32px;
 }
 
 .hero h1 {
@@ -108,6 +108,72 @@ body {
   margin: 8px 0 0;
   color: #1d4ed8;
   font-weight: 600;
+}
+
+.definition {
+  max-width: 860px;
+  margin: 14px auto 0;
+  color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.keywords {
+  margin: 18px 0 0;
+}
+
+.keywords-label {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+}
+
+.keyword-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.keyword-list li {
+  background: #eff6ff;
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  color: #1e3a8a;
+}
+
+.facts {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 8px 20px;
+  align-items: start;
+}
+
+.facts dt {
+  margin: 0;
+  font-weight: 700;
+  color: #1e3a8a;
+  font-size: 0.95rem;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--text);
 }
 
 .links {
@@ -298,5 +364,10 @@ th {
 
   .performance-tables table {
     min-width: 760px;
+  }
+
+  .facts > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }
