@@ -1,0 +1,11 @@
+# CG-MLLM
+
+CG-MLLM is a 3D multimodal large language model (3D MLLM) built upon Qwen3-VL and Hunyuan3D-2.1 VAE for unified 3D understanding, 3D captioning, and high-resolution 3D content generation.
+
+- Authors: Junming Huang, Chi Wang, Letian Li, Guangkai Xu, Donglin Huang, Hao Chen, Qiang Dai, Weiwei Xu
+- Venue: ICML 2026
+- arXiv: 2601.21798 — https://arxiv.org/abs/2601.21798
+- Project: https://dreaming-huang.github.io/CG-MLLM-page/ (https://cv.jream.top/CG-MLLM-page/)
+- Poster/ICML: https://icml.cc/virtual/2026/poster/63909
+- Code: https://github.com/dreaming-huang/CG-MLLM
+- Checkpoint: https://huggingface.co/JreamH/CGMLLM
