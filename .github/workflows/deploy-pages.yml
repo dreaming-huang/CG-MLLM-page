@@ -37,15 +37,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
-      - name: Bind custom domain
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -eu
-          gh api --method PUT \
-            -H "Accept: application/vnd.github+json" \
-            "/repos/${GITHUB_REPOSITORY}/pages" \
-            -f cname='cg-mllm.jream.top'
-          gh api "/repos/${GITHUB_REPOSITORY}/pages" \
-            --jq '{html_url,status,cname,https_enforced,build_type,public}'
